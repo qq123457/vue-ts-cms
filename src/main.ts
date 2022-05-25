@@ -1,6 +1,34 @@
-import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
 
-createApp(App).use(store).use(router).mount("#app");
+import regester from './global';
+
+// import '@/service/axios_demo';
+
+const app = createApp(App);
+app.use(store);
+app.use(router);
+
+app.use(regester);
+
+app.mount('#app');
+
+// console.log(process.env.VUE_APP_BASE_URL);
+import wkRequest from './service';
+interface DataType {
+  args: any;
+  headers: any;
+  origin: any;
+  url: any;
+}
+wkRequest
+  .request<DataType>({
+    baseURL: 'http://httpbin.org/get?acwink=123',
+    showLoading: false
+  })
+  .then((res) => {
+    console.log(res.args);
+    console.log(res.url);
+  });
