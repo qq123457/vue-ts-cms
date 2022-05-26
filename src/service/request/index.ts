@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import type { WKRequestConfig, WKRequestHookInterceptors } from './types';
 import { ElLoading } from 'element-plus';
-import 'element-plus/theme-chalk/el-loading.css';
+// import 'element-plus/theme-chalk/el-loading.css';
 const DEFAULT_LOADING = false;
 // axios的封装类
 class WKRequest {
@@ -65,7 +65,7 @@ class WKRequest {
       },
       (error) => {
         console.log('所有实例共有的响应失败拦截器');
-        this.loading.close();
+        if (this.loading) this.loading.close();
         // HttpErrorCode
         if (error.response.status === 404) {
           console.log('404错误');
