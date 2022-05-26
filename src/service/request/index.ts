@@ -77,7 +77,7 @@ class WKRequest {
   }
 
   // 此处应该返回一个Promise, T 为Promise resolve 返回的类型
-  request<T>(config: WKRequestConfig): Promise<T> {
+  request<T>(config: WKRequestConfig<T>): Promise<T> {
     return new Promise<T>((resolve, reject) => {
       // 单个请求共有的响应拦截器
       if (config.interceptors?.requestInterceptor)
@@ -107,19 +107,19 @@ class WKRequest {
     });
   }
 
-  get<T>(config: WKRequestConfig): Promise<T> {
+  get<T>(config: WKRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'GET' });
   }
 
-  post<T>(config: WKRequestConfig): Promise<T> {
+  post<T>(config: WKRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'POST' });
   }
 
-  delete<T>(config: WKRequestConfig): Promise<T> {
+  delete<T>(config: WKRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'DELETE' });
   }
 
-  patch<T>(config: WKRequestConfig): Promise<T> {
+  patch<T>(config: WKRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'PATCH' });
   }
 }
