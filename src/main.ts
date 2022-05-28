@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import store, { uploadCache } from './store';
+import store, { setupStore } from './store';
 
 import regester from './global';
 import '@/assets/css/main.scss';
@@ -12,10 +12,11 @@ import 'element-plus/theme-chalk/el-loading.css';
 
 const app = createApp(App);
 app.use(store);
+// vuex 状态初始化
+setupStore();
+
 app.use(router);
 
 app.use(regester);
 
 app.mount('#app');
-// vuex 状态初始化
-uploadCache();

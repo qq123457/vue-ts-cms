@@ -1,10 +1,14 @@
 <template>
   <div class="form">
-    <el-form label-width="10rem">
+    <el-form :label-width="labelWith">
       <el-row :gutter="24">
-        <template v-for="(item, index) in formItems" :key="index">
-          <el-col :span="8">
-            <el-form-item :label="item.label">
+        <template v-for="item in formItems" :key="item.label">
+          <el-col v-bind="colLayout">
+            <el-form-item
+              :label="item.label"
+              :rules="item.rules"
+              :style="itemStyle"
+            >
               <template
                 v-if="item.type === 'input' || item.type === 'password'"
               >
@@ -45,12 +49,26 @@
 <script setup lang="ts">
 import { defineProps, withDefaults } from 'vue';
 import { IFormItem } from '../types';
+
 const props = withDefaults(
   defineProps<{
     formItems: IFormItem[];
+    labelWith?: string;
+    itemStyle?: any;
+    colLayout?: any;
   }>(),
   {
-    formItems: () => []
+    labelWith: '10rem',
+    itemStyle: {
+      padding: '1rem 4rem'
+    },
+    colLayout: {
+      xl: 6, // => 1920px 4
+      lg: 8,
+      md: 12,
+      sm: 24,
+      xs: 24
+    }
   }
 );
 </script>

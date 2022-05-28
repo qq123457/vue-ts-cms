@@ -15,3 +15,10 @@ export interface IFormItem {
   // 争对特殊的属性
   otherOptions?: any;
 }
+
+export interface IForm {
+  formItems: IFormItem[];
+  labelWith?: string;
+  itemStyle?: any;
+  colLayout?: any;
+}

@@ -32,6 +32,10 @@ const loginModule: Module<ILoginState, IRootState> = {
     changeUserMenu(state, userMenu: any) {
       localCache.setCache('userMenu', userMenu);
       state.userMenu = userMenu;
+      // userMenus => routes
+
+      const routes = mapMenusToRoutes(userMenu);
+      routes.forEach((route) => router.addRoute('main', route));
     }
   },
   actions: {

@@ -16,7 +16,7 @@ const store = createStore<IRootState>({
 });
 
 // 加载缓存中的数据
-export function uploadCache() {
+export function setupStore() {
   store.dispatch('login/updateAction');
 }
 

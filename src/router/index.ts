@@ -44,11 +44,6 @@ router.beforeEach((to: any) => {
   if (to.name !== 'login') {
     if (!localCache.getCache('token')) return { name: 'login' };
   }
-
-  // userMenus => routes
-  const userMenu = (store.state as any).login.userMenu;
-  const routes = mapMenusToRoutes(userMenu);
-  routes.forEach((route) => router.addRoute('main', route));
 });
 
 export default router;
