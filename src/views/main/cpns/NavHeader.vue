@@ -47,6 +47,7 @@ defineExpose({
   margin-top: 1rem;
   padding: 1rem;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  background-color: white;
   .content {
     flex: 1;
     display: flex;

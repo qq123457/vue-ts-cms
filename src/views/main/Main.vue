@@ -13,7 +13,9 @@
           <nav-header @openchange="handleOpenChange" />
         </el-header>
         <el-main>
-          <router-view />
+          <div class="my__content">
+            <router-view />
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -35,9 +37,20 @@ const handleOpenChange = (isOpen: boolean) => {
   width: 100%;
   height: 100vh;
 }
+.nav__main {
+  background-color: white;
+}
 .nav__container {
   background-color: var(--bg--nav);
   height: 100vh;
   transition: all 0.3s;
+}
+.my__content {
+  box-sizing: inherit;
+  // margin: 2rem;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1);
+  // background-color: var(--color--white);
+  // height: auto;
+  width: 100%;
 }
 </style>
