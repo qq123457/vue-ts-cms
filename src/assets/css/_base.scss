@@ -1,0 +1,20 @@
+$color-white: #fff;
+
+*::after,
+*::before,
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  font-size: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+}
+
+:root {
+  --color--white: #fff;
+  --bg--nav: rgb(84, 92, 100);
+}

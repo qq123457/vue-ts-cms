@@ -1,14 +1,16 @@
 import { Module } from 'vuex';
-import { IRootState, ILoginSatet } from '../types';
+import { IRootState } from '../types';
+import { ILoginState } from './types';
 import {
   accountLoginRequest,
   userInfoByIDRequest,
   userMenusByIDRequest
-} from '@/service/login';
+} from '@/service/login/login';
 import type { AccountLoginType } from '@/service/login/types';
 import localCache from '@/utils/cache';
-
-const loginModule: Module<ILoginSatet, IRootState> = {
+import { mapMenusToRoutes } from '@/utils/map-menus';
+import router from '@/router';
+const loginModule: Module<ILoginState, IRootState> = {
   namespaced: true,
   state: () => {
     return {
@@ -30,6 +32,9 @@ const loginModule: Module<ILoginSatet, IRootState> = {
     changeUserMenu(state, userMenu: any) {
       localCache.setCache('userMenu', userMenu);
       state.userMenu = userMenu;
+
+      const routes = mapMenusToRoutes(userMenu);
+      routes.forEach((route) => router.addRoute('main', route));
     }
   },
   actions: {

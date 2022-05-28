@@ -1,4 +1,4 @@
-import { createStore } from 'vuex';
+import { createStore, Store, useStore as useVuexStore } from 'vuex';
 import { IRootState } from './types';
 import loginModule from './login/login';
 const store = createStore<IRootState>({
@@ -18,5 +18,10 @@ const store = createStore<IRootState>({
 // 加载缓存中的数据
 export function uploadCache() {
   store.dispatch('login/updateAction');
+}
+
+import { IStoreType } from './types';
+export function useStore(): Store<IStoreType> {
+  return useVuexStore();
 }
 export default store;
