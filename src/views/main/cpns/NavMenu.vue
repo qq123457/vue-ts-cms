@@ -7,27 +7,28 @@
         class="el-menu-vertical-demo"
         :collapse="!isOn"
         text-color="#fff"
+        :default-active="defaultValue"
       >
         <h2 class="heading-3 nav__title">后台管理</h2>
-        <template v-for="(nav, index) in userMenu" :key="nav.id">
-          <el-sub-menu v-if="nav.type === 1" :index="index + ''">
+        <template v-for="nav in userMenu" :key="nav.id">
+          <el-sub-menu v-if="nav.type === 1" :index="nav.id + ''">
             <template #title>
               <el-icon><icon-menu /></el-icon>
               <span>{{ nav.name }}</span>
             </template>
             <el-menu-item-group
-              v-for="(childNav, childIndex) in nav.children"
+              v-for="childNav in nav.children"
               :key="childNav.id"
             >
               <el-menu-item
-                :index="index + '-' + childIndex"
+                :index="childNav.id + ''"
                 @click="handleNavItemClick(childNav.url)"
               >
                 {{ childNav.name }}
               </el-menu-item>
             </el-menu-item-group>
           </el-sub-menu>
-          <el-menu-item v-else-if="nav.type === 2" :index="index + ''">
+          <el-menu-item v-else-if="nav.type === 2" :index="nav.id">
             <el-icon><icon-menu /></el-icon>
             <span>{{ nav.name }}</span>
           </el-menu-item>
@@ -38,13 +39,21 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps } from 'vue';
+import { computed, defineProps, ref } from 'vue';
 import { useStore } from '@/store';
 import { Menu as IconMenu } from '@element-plus/icons-vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
+import { pathMapToMenu } from '@/utils/map-menus';
 const store = useStore();
 const userMenu = computed(() => store.state.login.userMenu);
-const props = defineProps<{
+
+const route = useRoute();
+const currentPath = route.path;
+
+const menu = pathMapToMenu(userMenu.value, currentPath);
+const defaultValue = ref(menu.id + '');
+
+defineProps<{
   isOn: boolean;
 }>();
 

@@ -4,14 +4,7 @@
       <IconMenu />
     </el-icon>
     <div class="content">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
-        <el-breadcrumb-item>
-          <a href="/">promotion management</a>
-        </el-breadcrumb-item>
-        <el-breadcrumb-item>promotion list</el-breadcrumb-item>
-        <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
-      </el-breadcrumb>
+      <wk-breadcrumb :breadcrumbs="breadcrumbs" />
       <user-info />
     </div>
   </div>
@@ -20,9 +13,11 @@
 <script setup lang="ts">
 import { Menu as IconMenu } from '@element-plus/icons-vue';
 import userInfo from './userInfo.vue';
-
-import { ref, defineExpose, defineEmits } from 'vue';
-
+import WkBreadcrumb from '@/bast-ui/breadcrumb';
+import { ref, defineExpose, defineEmits, computed } from 'vue';
+import { useStore } from '@/store';
+import { useRoute } from 'vue-router';
+import { pathMapBreadcrumbs } from '@/utils/map-menus';
 const isOpen = ref(true);
 
 const emit = defineEmits<{
@@ -35,6 +30,15 @@ const handleFoldClick = () => {
   emit('openchange', isOpen.value);
 };
 
+// 面包屑：{name,path}
+
+const route = useRoute();
+const store = useStore();
+const breadcrumbs = computed(() =>
+  pathMapBreadcrumbs(store.state.login.userMenu, route.path)
+);
+
+// 为外部组件暴露的方法
 defineExpose({
   handleFoldClick
 });

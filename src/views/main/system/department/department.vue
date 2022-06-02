@@ -1,18 +1,22 @@
 <template>
   <div class="department">
-    <h2>department</h2>
+    <div class="search">
+      <wk-page-search
+        :searchFormConfig="searchFormConfig"
+        pageName="department"
+      />
+    </div>
+    <div class="content"></div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'department',
-  setup() {
-    return {};
-  }
-});
+<script setup lang="ts">
+import { formConfig as searchFormConfig } from './config/search-config';
+import WkPageSearch from '@/components/page-search';
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.search {
+  padding: 2rem;
+}
+</style>

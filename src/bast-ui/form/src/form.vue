@@ -1,5 +1,8 @@
 <template>
   <div class="form">
+    <div class="header">
+      <slot name="header"></slot>
+    </div>
     <el-form :label-width="labelWith">
       <el-row :gutter="24">
         <template v-for="item in formItems" :key="item.label">
@@ -16,11 +19,12 @@
                   :placeholder="item.placeholder"
                   :show-password="item.type === 'password'"
                   v-bind="item.otherOptions"
+                  v-model="formData[item.field]"
                 ></el-input>
               </template>
 
               <template v-else-if="item.type === 'select'">
-                <el-select style="width: 100%">
+                <el-select style="width: 100%" v-model="formData[item.field]">
                   <el-option
                     v-for="option in item.options"
                     :value="option.value"
@@ -36,6 +40,7 @@
                 <el-date-picker
                   v-bind="item.otherOptions"
                   style="width: 100%"
+                  v-model="formData[item.field]"
                 />
               </template>
             </el-form-item>
@@ -43,11 +48,14 @@
         </template>
       </el-row>
     </el-form>
+    <div class="footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps, withDefaults } from 'vue';
+import { defineProps, withDefaults, defineEmits, ref, watch } from 'vue';
 import { IFormItem } from '../types';
 
 const props = withDefaults(
@@ -56,6 +64,7 @@ const props = withDefaults(
     labelWith?: string;
     itemStyle?: any;
     colLayout?: any;
+    modelValue: any;
   }>(),
   {
     labelWith: '10rem',
@@ -71,6 +80,26 @@ const props = withDefaults(
     }
   }
 );
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', obj: any): void;
+}>();
+
+// 拷贝，保持单项数据流
+const formData = ref({ ...props.modelValue });
+
+// 实现监听
+watch(formData.value, (newValue) => emit('update:modelValue', newValue), {
+  deep: true
+});
 </script>
 
-<style scoped></style>
+<style scoped>
+/* .header {
+  text-align: center;
+}
+
+.footer {
+  text-align: right;
+} */
+</style>

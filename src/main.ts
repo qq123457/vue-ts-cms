@@ -11,10 +11,12 @@ import 'element-plus/theme-chalk/el-message.css';
 import 'element-plus/theme-chalk/el-loading.css';
 
 const app = createApp(App);
-app.use(store);
-// vuex 状态初始化
-setupStore();
+// app.config.globalProperties.$fliter
 
+// vuex 状态初始化
+
+app.use(store);
+setupStore();
 app.use(router);
 
 app.use(regester);

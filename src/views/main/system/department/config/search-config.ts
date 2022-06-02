@@ -43,7 +43,7 @@ export const formConfig: IForm = {
     }
   ],
   itemStyle: {
-    padding: '0.5rem 0rem'
+    padding: '1.5rem 0rem'
   },
   colLayout: {
     span: 8
