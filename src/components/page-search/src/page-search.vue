@@ -8,11 +8,11 @@
       </template>
       <template #footer>
         <div style="text-align: right">
-          <el-button>
+          <el-button @click="handleResetClick">
             <el-icon><Refresh /></el-icon>
             重置
           </el-button>
-          <el-button type="primary">
+          <el-button type="primary" @click="handleSearchClick">
             <el-icon><Search /></el-icon>
             搜索
           </el-button>
@@ -23,10 +23,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps } from 'vue';
+import { ref, defineProps, defineEmits } from 'vue';
 import WkForm, { IForm } from '@/bast-ui/form';
 import { Search, Refresh } from '@element-plus/icons-vue';
-import { useStore } from '@/store';
+
 const props = defineProps<{
   searchFormConfig: IForm;
   pageName: string;
@@ -39,14 +39,27 @@ props.searchFormConfig.formItems.forEach((formItem) =>
   })
 );
 
-const store = useStore();
-store.dispatch('system/getPageList', {
-  pageName: props.pageName,
-  queryInfo: {
-    offset: 0,
-    size: 10
-  }
-});
+const emit = defineEmits<{
+  (e: 'resetBtnClick'): void;
+  (e: 'queryBtnClick', value: any): void;
+}>();
+
+const handleSearchClick = () => {
+  emit('queryBtnClick', formData.value);
+};
+// 用户重置
+const handleResetClick = () => {
+  for (const key in formData.value) (formData.value as any)[key] = '';
+  emit('resetBtnClick');
+};
+// const store = useStore();
+// store.dispatch('system/getPageList', {
+//   pageName: props.pageName,
+//   queryInfo: {
+//     offset: 0,
+//     size: 10
+//   }
+// });
 </script>
 
 <style scoped></style>

@@ -6,6 +6,8 @@ export interface IProp {
 }
 
 export interface ITable {
-  tableData: any[];
-  tableItems: IProp[];
+  propList: IProp[];
+  showIndexColumn: boolean;
+  showSelectColumn: boolean;
+  title: string;
 }

@@ -1,11 +1,7 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-aside
-        class="nav__container"
-        :width="isOn ? '21rem' : '6rem'"
-        translate="soomth"
-      >
+      <el-aside class="nav__container" :width="isOn ? '21rem' : '6rem'">
         <nav-menu :isOn="isOn" />
       </el-aside>
       <el-container class="nav__main">
@@ -35,14 +31,15 @@ const handleOpenChange = (isOpen: boolean) => {
 <style lang="scss" scoped>
 .common-layout {
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 .nav__main {
   background-color: white;
 }
 .nav__container {
   background-color: var(--bg--nav);
-  height: 100vh;
+  min-height: 100vh;
+
   transition: all 0.3s;
 }
 .my__content {

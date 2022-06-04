@@ -73,12 +73,20 @@ const handleNavItemClick = (url: string) => {
 
 <style lang="scss" scoped>
 .nav {
-  flex: 1;
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: inherit;
   .nav__title {
     color: var(--color--white);
     text-align: center;
     margin: 1rem 0;
   }
+}
+
+.el-menu-vertical-demo {
+  widows: 100%;
+  border: none;
 }
 </style>

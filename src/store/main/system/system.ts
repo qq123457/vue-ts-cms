@@ -7,13 +7,15 @@ const systemModule: Module<ISystemState, IRootState> = {
   state: () => {
     return {
       usersList: [],
-      userCount: 0,
+      usersCount: 0,
       menuList: [],
       menuCount: 0,
       roleList: [],
       roleCount: 0,
       departmentList: [],
-      departmentCount: 0
+      departmentCount: 0,
+      goodsList: [],
+      goodsCount: 0
     };
   },
   mutations: {
@@ -21,10 +23,45 @@ const systemModule: Module<ISystemState, IRootState> = {
       state.usersList = list;
     },
     changeUsersCount(state, count: number) {
-      state.userCount = count;
+      state.usersCount = count;
+    },
+    changeRoleList(state, list: any[]) {
+      state.roleList = list;
+    },
+    changeRoleCount(state, count: number) {
+      state.roleCount = count;
+    },
+    changeMenuList(state, list: any[]) {
+      state.menuList = list;
+    },
+    changeMenuCount(state, count: number) {
+      state.menuCount = count;
+    },
+    changeDepartmentList(state, list: any[]) {
+      state.departmentList = list;
+    },
+    changeDepartmentCount(state, count: number) {
+      state.departmentCount = count;
+    },
+    changeGoodsList(state, list: any[]) {
+      state.goodsList = list;
+    },
+    changeGoodsCount(state, count: number) {
+      state.goodsCount = count;
     }
   },
-  getters: {},
+  getters: {
+    pageListData(state) {
+      return (pageName: string) => {
+        return (state as any)[`${pageName}List`];
+      };
+    },
+    pageListCount(state) {
+      return (pageName: string) => {
+        return (state as any)[`${pageName}Count`];
+      };
+    }
+  },
   actions: {
     // 请求当页面的数据
     async getPageList({ commit }, payload: any) {
