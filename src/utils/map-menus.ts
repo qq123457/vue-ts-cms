@@ -37,7 +37,6 @@ export function pathMapBreadcrumbs(userMenu: any[], currentPath: string) {
   const breadcrumbs: IBreadcrumb[] = [];
 
   pathMapToMenu(userMenu, currentPath, breadcrumbs);
-  console.log();
   return breadcrumbs;
 }
 
@@ -62,4 +61,39 @@ export function pathMapToMenu(
   return null;
 }
 
+export function mapMenusToPermissions(userMenus: any[]) {
+  const permissions: string[] = [];
+
+  const _recureseGetPermission = (menus: any[]) => {
+    for (const menu of menus) {
+      if (menu.type === 1 || menu.type === 2) {
+        _recureseGetPermission(menu.children ?? []);
+      } else if (menu.type === 3) {
+        permissions.push(menu.permission);
+      }
+    }
+  };
+
+  _recureseGetPermission(userMenus);
+
+  return permissions;
+}
+
+export function getMenuLeafKeys(menuList: any[]) {
+  const leftKeys: number[] = [];
+
+  const _recurseGetLeaf = (menuList: any[]) => {
+    for (const menu of menuList) {
+      if (menu.children) {
+        _recurseGetLeaf(menu.children);
+      } else {
+        leftKeys.push(menu.id);
+      }
+    }
+  };
+
+  _recurseGetLeaf(menuList);
+
+  return leftKeys;
+}
 export { firstMenu };

@@ -21,17 +21,7 @@ export const formConfig: IForm = {
       placeholder: '请输入密码'
     },
     {
-      field: 'sport',
-      type: 'select',
-      label: '喜欢的运动',
-      placeholder: '请选择喜欢的运动',
-      options: [
-        { title: '篮球', value: 'basketball' },
-        { title: '足球', value: 'football' }
-      ]
-    },
-    {
-      field: 'createTime',
+      field: 'createAt',
       type: 'datepicker',
       label: '创建时间',
       placeholder: '请选择创建时间范围',
@@ -45,8 +35,6 @@ export const formConfig: IForm = {
   itemStyle: {
     padding: '0.5rem 0rem'
   },
-  colLayout: {
-    span: 8
-  },
+
   labelWith: '10rem'
 };

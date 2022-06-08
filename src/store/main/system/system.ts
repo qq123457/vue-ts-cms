@@ -1,7 +1,12 @@
 import { Module } from 'vuex';
 import { IRootState } from '@/store/types';
 import { ISystemState } from './types';
-import { getPageListData } from '@/service/main/system/system';
+import {
+  getPageListData,
+  deleteRecordById,
+  editPageData,
+  createPageData
+} from '@/service/main/system/system';
 const systemModule: Module<ISystemState, IRootState> = {
   namespaced: true,
   state: () => {
@@ -78,8 +83,51 @@ const systemModule: Module<ISystemState, IRootState> = {
           pageName[0],
           pageName[0].toUpperCase()
         )}Count`,
-        totalCount
+        totalCount ?? 0
       );
+    },
+    async deletePageData({ dispatch }, payload: any) {
+      const { pageName, id, queryInfo } = payload;
+      const url = `/${pageName}/${id}`;
+
+      // 删除网络数据
+      await deleteRecordById(url);
+
+      // 重新请求
+      dispatch('getPageList', {
+        pageName,
+        queryInfo: {
+          offset: 0,
+          size: 10,
+          ...queryInfo
+        }
+      });
+    },
+    async createPageDataAction({ dispatch }, payload: any) {
+      const { pageName, newData } = payload;
+      const url = `/${pageName}`;
+      await createPageData(url, newData);
+      // 重新请求
+      dispatch('getPageList', {
+        pageName,
+        queryInfo: {
+          offset: 0,
+          size: 10
+        }
+      });
+    },
+    async editPageDataAction({ dispatch }, payload: any) {
+      const { pageName, newData, id } = payload;
+      const url = `/${pageName}/${id}`;
+      await editPageData(url, newData);
+      // 重新请求
+      dispatch('getPageList', {
+        pageName,
+        queryInfo: {
+          offset: 0,
+          size: 10
+        }
+      });
     }
   }
 };

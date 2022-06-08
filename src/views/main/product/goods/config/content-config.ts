@@ -10,24 +10,26 @@ export const contentTableConfig: ITable = {
     {
       prop: 'oldPrice',
       label: '原价格',
-      minWidth: 80
+      minWidth: 80,
+      slotName: 'oldPrice'
     },
     {
       prop: 'newPrice',
       label: '新价格',
-      minWidth: 80
+      minWidth: 80,
+      slotName: 'newPrice'
     },
     {
-      prop: 'imageUrl',
+      prop: 'imgUrl',
       label: '商品图片',
       minWidth: 100,
-      slotName: 'imageUrl'
+      slotName: 'image'
     },
     {
-      prop: 'enable',
+      prop: 'status',
       label: '状态',
       minWidth: 100,
-      slotName: 'enable'
+      slotName: 'status'
     },
     {
       prop: 'createAt',

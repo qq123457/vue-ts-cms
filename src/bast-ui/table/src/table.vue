@@ -17,6 +17,7 @@
       border
       style="width: 100%"
       @selection-change="handleSelectionChange"
+      v-bind="childrenProps"
     >
       <el-table-column
         v-if="showSelectColumn"
@@ -31,7 +32,7 @@
         align="center"
       ></el-table-column>
       <template v-for="item in propList" :key="item.prop">
-        <el-table-column v-bind="item" align="center">
+        <el-table-column v-bind="item" align="center" show-overflow-tooltip>
           <template #default="scope">
             <slot :name="item.slotName ?? ''" :row="scope.row">
               {{ scope.row[item.prop] }}
@@ -40,7 +41,7 @@
         </el-table-column>
       </template>
     </el-table>
-    <div class="footer">
+    <div class="footer" v-if="showFooter">
       <slot name="footer">
         <el-pagination
           v-model:currentPage="page.currentPage"
@@ -72,12 +73,16 @@ const props = withDefaults(
     title?: string;
     dataCount: number;
     page?: any;
+    childrenProps?: any;
+    showFooter?: boolean;
   }>(),
   {
     showIndexColumn: false,
     showSelectColumn: false,
     title: '',
-    page: () => ({ currentPage: 0, pageSize: 10 })
+    page: () => ({ currentPage: 0, pageSize: 10 }),
+    childrenProps: () => ({}),
+    showFooter: true
   }
 );
 
@@ -96,11 +101,9 @@ const background = ref(false);
 const disabled = ref(false);
 
 const handleSizeChange = (pageSize: number) => {
-  console.log(pageSize);
   emit('update:page', { ...props.page, pageSize });
 };
 const handleCurrentChange = (currentPage: number) => {
-  console.log(currentPage);
   emit('update:page', { ...props.page, currentPage });
 };
 </script>

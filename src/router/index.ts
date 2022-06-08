@@ -18,6 +18,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/main/Main.vue')
     // children: [] // -> 根据userMenus 决定
   },
+  {
+    path: '/test',
+    name: 'test',
+    component: () => import('@/views/test/testNextTree.vue')
+  },
   // {
   //   path: '/about',
   //   name: 'about',

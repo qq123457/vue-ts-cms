@@ -10,4 +10,6 @@ export interface ITable {
   showIndexColumn: boolean;
   showSelectColumn: boolean;
   title: string;
+  childrenProps?: any;
+  showFooter?: boolean;
 }

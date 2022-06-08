@@ -15,6 +15,7 @@ export interface IFormItem {
   options?: OptionType[];
   // 争对特殊的属性
   otherOptions?: any;
+  isHidden?: boolean;
 }
 
 export interface IForm {
