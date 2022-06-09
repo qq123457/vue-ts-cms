@@ -5,22 +5,16 @@ export const formConfig: IForm = {
     {
       field: 'id',
       type: 'input',
-      label: 'ID',
+      label: '分类ID',
       placeholder: '请输入ID'
     },
     {
       field: 'name',
       type: 'input',
-      label: '部门名称',
-      placeholder: '请输部门名称'
+      label: '分类名称',
+      placeholder: '请输入分类名称'
     },
-    {
-      field: 'leader',
-      type: 'select',
-      label: '部门领导',
-      placeholder: '请选择部门领导',
-      options: []
-    },
+
     {
       field: 'createAt',
       type: 'datepicker',

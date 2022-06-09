@@ -51,5 +51,5 @@ export const contentTableConfig: ITable = {
   ],
   showIndexColumn: true,
   showSelectColumn: true,
-  title: '角色列表'
+  title: '商品列表'
 };

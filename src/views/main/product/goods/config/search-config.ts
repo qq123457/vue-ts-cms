@@ -1,37 +1,32 @@
 import { IForm } from '@/bast-ui/form';
+import { placeholderSign } from 'element-plus/es/components/table-v2/src/private';
 
 export const formConfig: IForm = {
   formItems: [
     {
-      field: 'id',
-      type: 'input',
-      label: 'ID',
-      placeholder: '请输入ID'
-    },
-    {
       field: 'name',
       type: 'input',
-      label: '用户名',
-      placeholder: '请输入用户名'
+      label: '商品名称',
+      placeholder: '请输入商品名称'
     },
     {
-      field: 'password',
-      type: 'input',
-      label: '密码',
-      placeholder: '请输入密码'
-    },
-    {
-      field: 'sport',
+      field: 'status',
       type: 'select',
-      label: '喜欢的运动',
-      placeholder: '请选择喜欢的运动',
+      label: '状态',
+      placeholder: '请选择状态',
       options: [
-        { title: '篮球', value: 'basketball' },
-        { title: '足球', value: 'football' }
+        { title: '上架', value: 1 },
+        { title: '下架', value: 0 }
       ]
     },
     {
-      field: 'createTime',
+      field: 'newPrice',
+      type: 'input',
+      label: '当前价格',
+      placeholder: '请输入当前价格'
+    },
+    {
+      field: 'createAt',
       type: 'datepicker',
       label: '创建时间',
       placeholder: '请选择创建时间范围',

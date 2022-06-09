@@ -9,4 +9,6 @@ export interface ISystemState {
   departmentCount: number;
   goodsList: any[];
   goodsCount: number;
+  categoryList: any[];
+  categoryCount: number;
 }
