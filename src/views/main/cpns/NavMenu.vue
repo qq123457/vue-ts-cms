@@ -8,6 +8,7 @@
         :collapse="!isOn"
         text-color="#fff"
         :default-active="defaultValue"
+        unique-opened
       >
         <h2 class="heading-3 nav__title">后台管理</h2>
         <template v-for="nav in userMenu" :key="nav.id">
